@@ -14,7 +14,7 @@ install -m 700 /dev/null ~/script.sh
 echo '# Environment variables:' >> ~/script.sh
 env -0 | while read -r -d '' line; do
     # Skip unnecessary env vars, wrap the single- or multiline value in single quotes, escape existing single quotes.
-    [[ ! ${line} =~ ^(HOSTNAME=|HOME=|INPUT_) ]] && echo "${line%%=*}='$(echo "${line#*=}" | sed "s/'/'\\\\''/g")'" >> ~/script.sh
+    [[ ! ${line} =~ ^(HOSTNAME=|HOME=|INPUT_) ]] && echo "export ${line%%=*}='$(echo "${line#*=}" | sed "s/'/'\\\\''/g")'" >> ~/script.sh
 done
 echo '' >> ~/script.sh
 echo '# Commands:' >> ~/script.sh
